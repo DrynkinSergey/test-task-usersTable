@@ -14,7 +14,6 @@ function createData(id, avatar, name, age, status, options) {
 const rows = [
     createData('1', '-', 'Sergey', 28, 'Активен'),
     createData('2', '-', 'Andrey', 28, 'Активен'),
-
 ];
 
 export default function BasicTable() {
