@@ -9,47 +9,63 @@ import Paper from '@mui/material/Paper';
 import '../../index.css'
 import Btn from "../Common/Button";
 import {useState} from "react";
-const sortBy = require('lodash/sortBy');
 function createData(id, avatar, name, age, status, options) {
     return { id, avatar, name, age, status, options};
 }
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 export default function BasicTable() {
-    const data = [
-        {id: '1', avatar: '-', name: 'Sergey', age: 77, status: 'Активен'},
-        {id: '2', avatar: '-', name: 'Sergey', age: 7, status: 'Активен'},
-        {id: '3', avatar: '-', name: 'Sergey', age: 17, status: 'Активен'},
-        {id: '4', avatar: '-', name: 'Sergey', age: 47, status: 'Активен'},
-    ];
-    const [state, changeState] = useState(data);
-    const sortItem = () => {
+
+
+    const [state, changeState] = useState(
+        [
+            {id: 1, avatar: '-', name: 'Sergey', age: 77, status: 'Активен'},
+            {id: 2, avatar: '-', name: 'Sergey', age: 7, status: 'Активен'},
+            {id: 3, avatar: '-', name: 'Sergey', age: 17, status: 'Активен'},
+            {id: 4, avatar: '-', name: 'Sergey', age: 47, status: 'Активен'},
+        ]
+    );
+
+    const sortItemByAge = () => {
         const arr =(state).concat().sort((a, b) => a.age > b.age ? 1 : -1)
             .map((item, i) =>  item);
-        changeState(arr)
+        changeState(arr);
+    }
+    const sortItemById = () => {
+        const arr =(state).concat().sort((a, b) => a.id > b.id ? 1 : -1)
+            .map((item, i) =>  item);
+        changeState(arr);
     }
     const unsorted = () => {
-        changeState(data)
+        changeState(state)
+    }
+    const addedUser = ()=> {
+        changeState( [...state, {id: state.length+1, avatar: '-', name: 'Sergey', age: 17, status: 'Активен'}])
+
+
     }
 
     return (
         <div>
-            <Btn />
+            <Btn onClick={addedUser}/>
         <TableContainer component={Paper} className='table'>
             <Table sx={{ minWidth: 650 }} aria-label="test table">
                 <TableHead>
 
                     <TableRow>
-                        <TableCell>№ п/п</TableCell>
+                        <TableCell  onClick={sortItemById} >№ п/п</TableCell>
                         <TableCell align="right">Аватар</TableCell>
                         <TableCell  align="right" onClick={unsorted}>Имя</TableCell>
-                        <TableCell align="right" onClick={sortItem}>Возраст</TableCell>
+                        <TableCell align="right" onClick={sortItemByAge}>Возраст</TableCell>
                         <TableCell align="right">Статус</TableCell>
-                        <TableCell align="right">Опции</TableCell>
+                        <TableCell align="right" onClick={addedUser}>Опции</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {state.map((row) => (
+                    {state.map((row,index) => (
                         <TableRow
-                            key={row.id}
+                            key={`${row.id}_${row.index}`}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row" width="20px">{row.id}</TableCell>
