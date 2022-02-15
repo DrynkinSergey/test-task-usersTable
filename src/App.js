@@ -1,14 +1,21 @@
 import React from 'react';
 import Table from "./Components/Table/Table";
 import './index.css'
-import Btn from "./Components/Common/Button";
 
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
+import AddUser from "./Components/AddUser/AddUser";
 function App() {
   return (
+
     <div className="AppWrapper">
-    <Table/>
+      <Switch>
+        <Route  path='/home' component={Table} />
+        <Route path='/addUser' component={AddUser} />
+          <Redirect from='/' to='/home'/>
+      </Switch>
+
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

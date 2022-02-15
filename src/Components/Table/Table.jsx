@@ -10,9 +10,14 @@ import '../../index.css'
 import Btn from "../Common/Button";
 import {useState} from "react";
 import axios from "axios";
-/*function createData(id, avatar, name, age, status, options) {
-    return { id, avatar, name, age, status, options};
-}*/
+
+import {
+    Route,
+    Switch,
+    Redirect,
+    withRouter, Link, NavLink
+} from "react-router-dom";
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -33,14 +38,14 @@ export default function BasicTable() {
         changeState(arr);
     }
     const sortItemById = () => {
-        const arr =(state).concat().sort((a, b) => a.id > b.id ? 1 : -1)
+        const arr = (state).concat().sort((a, b) => a.id > b.id ? 1 : -1)
             .map((item) =>  item);
         changeState(arr);
     }
     const unsorted = () => {
         changeState(state)
     }
-    const addedUser = async ()=> {
+    const addUser = async ()=> {
         let status;
        await axios.get(`https://yesno.wtf/api`)
             .then(res => {
@@ -64,7 +69,8 @@ export default function BasicTable() {
 
     return (
         <div>
-            <Btn onClick={addedUser} title='Добавить пользователя'/>
+            <NavLink to='/addUser' >sdfsd</NavLink>
+            <Btn onClick={addUser} title='Добавить пользователя'/>
             <Btn onClick={saveData} title='Сохранить в LocalStorage'/>
             <Btn onClick={deleteData} title='Очистить LocalStorage'/>
 
