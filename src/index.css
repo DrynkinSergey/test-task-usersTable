@@ -14,10 +14,14 @@ code {
 .AppWrapper{
   max-width: 1000px;
   margin: 0 auto;
+  padding-top: 40px;
 }
 .table{
-  margin-top: 50px;
+  margin-bottom: 50px;
+  max-height: 760px;
 }
 .btn{
-  padding: 20px;
+ margin: 39px;
+  display: inline;
+
 }
