@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink} from "react-router-dom";
 
-const AddUser = (props) => (
+const AddUser = () => (
     <div>
         <form onSubmit={(e)=> {
             e.preventDefault()
