@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './index.css'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,25 +9,38 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {connect, useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
-import {deleteUser, sortAge, sortId} from "./redux/actions";
-import Button from "./Components/Common/Button";
+import {deleteUser, sortAge} from "./redux/actions";
 
 const App = (props) => {
-
+    const [sortedAge, setSorted] = useState(false);
+    const [sortedId, setSortedId] = useState(false);
     const sortItemById = () => {
-        const arr = (props.users).concat().sort((a, b) => +a.index > +b.index ? 1 : -1)
-            .map((item) => item);
-        /*const arr = (props.users).concat().sort(function(a, b) {
-            return a - b;
-        });*/
-        console.log(arr);
-        dispatch(sortId(arr))
+        if (sortedId) {
+            const arr = (props.users).concat().sort((a, b) => +a.index > +b.index ? 1 : -1).reverse()
+                .map((item) => item);
+            setSortedId(!sortedId);
+            dispatch(sortAge(arr));
+        } else {
+            const arr = (props.users).concat().sort((a, b) => +a.index > +b.index ? 1 : -1)
+                .map((item) => item);
+            setSortedId(!sortedId);
+            dispatch(sortAge(arr));
+        }
 
     }
     const sortItemByAge = () => {
-        const arr = (props.users).concat().sort((a, b) => +a.age > +b.age ? 1 : -1)
-            .map((item) => item);
-        dispatch(sortAge(arr));
+        if (sortedAge) {
+           const arr = (props.users).concat().sort((a, b) => +a.age > +b.age ? 1 : -1).reverse()
+                .map((item) => item);
+           setSorted(!sortedAge);
+            dispatch(sortAge(arr));
+        } else {
+            const arr = (props.users).concat().sort((a, b) => +a.age > +b.age ? 1 : -1)
+                .map((item) => item);
+            setSorted(!sortedAge);
+            dispatch(sortAge(arr));
+        }
+
 
     }
 
