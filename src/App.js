@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './index.css'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,6 +12,41 @@ import {Link} from "react-router-dom";
 import {deleteUser, sortAge} from "./redux/actions";
 
 const App = (props) => {
+
+
+   /* useEffect(() => {
+
+        // if (localStorage.getItem('data') !== null) {
+        //     localStorage.setItem("data", JSON.stringify(props.users));
+        //     const data = JSON.parse(localStorage.getItem('data'));
+        //
+        //     console.log('data storage >>>',data);
+        //     // dispatch(sortAge(data));
+        // }else {
+        //     console.log('No data in localStorage')
+        // }
+        localStorage.setItem("data", JSON.stringify(props.users));
+        console.log('Component did mount')
+        return () => {
+            console.log('Component will unmount');
+            localStorage.setItem("data", JSON.stringify(props.users));
+            const data = JSON.parse(localStorage.getItem('data'));
+            console.log(data)
+
+        }
+
+    },[]);*/
+
+
+    function useAsync(asyncFn, onSuccess) {
+        useEffect(() => {
+            let isActive = true;
+            asyncFn().then(data => {
+                if (isActive) onSuccess(data);
+            });
+            return () => { isActive = false };
+        }, [asyncFn, onSuccess]);
+    }
     const [sortedAge, setSorted] = useState(false);
     const [sortedId, setSortedId] = useState(false);
     const sortItemById = () => {
