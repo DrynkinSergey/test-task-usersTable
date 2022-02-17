@@ -19,9 +19,61 @@ code {
 .table{
   margin-bottom: 50px;
   max-height: 760px;
+  margin-top: 56px;
 }
 .btn{
  margin: 39px;
   display: inline;
+
+}
+
+.noUsers{
+  position: absolute;
+  display: block;
+  font-size: 50px;
+}
+.formAddUser{
+  padding-top: 80px;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  transform: translatey(40%);
+  border-radius: 20px;
+  box-shadow: 1px 4px 47px 19px rgba(34, 60, 80, 0.25);
+}
+input{
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 5px 20px;
+  height: 30px;
+
+}
+.link{
+  text-decoration: none;
+  color:white;
+  border-radius: 10px;
+  border:1px solid ;
+}
+.btn{
+  width: 40%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+.ok{
+  background-color: green;
+}
+.cancel{
+  background-color: darkred;
+}
+p{
+  text-align: center;
+}
+.table{
+  box-shadow: 1px 4px 47px 19px rgba(34, 60, 80, 0.25) !important;
 
 }

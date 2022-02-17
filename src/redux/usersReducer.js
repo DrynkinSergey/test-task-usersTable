@@ -1,13 +1,11 @@
-import {AddUser} from "./types";
+import {AddUser, SortByAge} from "./types";
 
 const initialState = {
-    users: [
-        {id: 1, avatar: 1, name: 'Sergey', age: 77, status: 'Активен'}
-    ]
+    users: [],
+    index: 0
 }
 
 export const usersReducer = (state = initialState, action) => {
-    console.log('UsersReducer > ', action)
     switch (action.type) {
         case AddUser :
             return {
@@ -18,9 +16,19 @@ export const usersReducer = (state = initialState, action) => {
                         avatar: action.data.avatar,
                         name: action.data.name,
                         age: action.data.age,
-                        status: 'Активен'
+                        status: action.data.status,
+                        index: state.index
+
                     }],
+                index: state.index + 1
             }
+        case SortByAge :
+            return {
+                ...state,
+                users: action.data
+            }
+
+
         default :
             return state;
     }
