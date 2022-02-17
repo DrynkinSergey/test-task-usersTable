@@ -9,34 +9,40 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {connect, useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
-import {sortAge} from "./redux/actions";
+import {deleteUser, sortAge, sortId} from "./redux/actions";
+import Button from "./Components/Common/Button";
 
 const App = (props) => {
 
     const sortItemById = () => {
-        const arr = (props.users).concat().sort((a, b) => a.id > b.id ? 1 : -1)
+        const arr = (props.users).concat().sort((a, b) => +a.index > +b.index ? 1 : -1)
             .map((item) => item);
+        /*const arr = (props.users).concat().sort(function(a, b) {
+            return a - b;
+        });*/
+        console.log(arr);
+        dispatch(sortId(arr))
 
     }
     const sortItemByAge = () => {
-        const arr = (props.users).sort((a, b) => a.age > b.age ? 1 : -1)
+        const arr = (props.users).concat().sort((a, b) => +a.age > +b.age ? 1 : -1)
             .map((item) => item);
         dispatch(sortAge(arr));
 
     }
-   /* const data = JSON.parse(localStorage.getItem('data'));
-    localStorage.getItem('data')
 
-    function saveData() {
-        localStorage.setItem("data", JSON.stringify(props.users));
-    }
+    /* const data = JSON.parse(localStorage.getItem('data'));
+     localStorage.getItem('data')
 
-    function deleteData() {
-        localStorage.removeItem('data');
-    }*/
+     function saveData() {
+         localStorage.setItem("data", JSON.stringify(props.users));
+     }
+
+     function deleteData() {
+         localStorage.removeItem('data');
+     }*/
 
     const dispatch = useDispatch();
-
 
     return (
         <div className='AppWrapper'>
@@ -45,7 +51,7 @@ const App = (props) => {
                     <Table sx={{minWidth: 650}} aria-label="test table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>№ п/п</TableCell>
+                                <TableCell onClick={sortItemById}>№ п/п</TableCell>
                                 <TableCell align="right">Аватар </TableCell>
                                 <TableCell align="right">Имя</TableCell>
                                 <TableCell align="right" onClick={sortItemByAge}>Возраст</TableCell>
@@ -57,15 +63,19 @@ const App = (props) => {
                             {
                                 props.users.map((row) => (
                                     <TableRow
-                                        key={`${row.id}_${row.index}`}
-                                        sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                                    >
-                                        <TableCell component="th" scope="row" width="20px">{row.index + 1}</TableCell>
+                                        key={row.id}
+                                        sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                                        <TableCell component="th" scope="row" width="20px">{row.index}</TableCell>
                                         <TableCell align="right"><img width='30px' src={row.avatar} alt=""/></TableCell>
                                         <TableCell className='name' align="right">{row.name}</TableCell>
                                         <TableCell align="right">{row.age}</TableCell>
                                         <TableCell align="right">{row.status === 'yes' ? 'Активен' : '-'}</TableCell>
-                                        <TableCell align="center">&times;</TableCell>
+                                        <TableCell align="center">
+                                            <button onClick={()=>{
+                                                dispatch(deleteUser(row.id))
+                                                console.log(row.id);
+                                            }} className='btnDelete'>Удалить</button>
+                                        </TableCell>
                                     </TableRow>
                                 ))
                             }

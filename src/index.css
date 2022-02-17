@@ -75,5 +75,15 @@ p{
 }
 .table{
   box-shadow: 1px 4px 47px 19px rgba(34, 60, 80, 0.25) !important;
-
+}
+.btnDelete{
+  border-radius: 10px;
+  color: white;
+  background-color: red;
+  padding: 5px;
+  border: none;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+.btnDelete:hover{
+  cursor: pointer;
 }

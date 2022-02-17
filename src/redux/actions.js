@@ -14,3 +14,17 @@ export function sortAge(data) {
 
     }
 }
+export function sortId(data) {
+    return {
+        type: 'SORT-ID-A-B',
+        data
+
+    }
+}
+export function deleteUser(id) {
+    return {
+        type: 'DELETE-USER',
+        id
+
+    }
+}

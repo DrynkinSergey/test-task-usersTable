@@ -23,6 +23,7 @@ const AddUser = () => {
             })
     }
 
+
     return (
         <form className='formAddUser' onSubmit={handleSubmit}>
             <p>Имя</p>
