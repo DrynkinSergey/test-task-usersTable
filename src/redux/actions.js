@@ -39,4 +39,10 @@ export function editUser(id,name,age) {
 
     }
 }
+export function loadUsers(data) {
+    return {
+        type: 'LOAD-USERS',
+        data
+    }
+}
 

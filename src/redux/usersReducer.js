@@ -1,4 +1,4 @@
-import {AddUser, DeleteUser, EditUser, SortByAge, SortById} from "./types";
+import {AddUser, DeleteUser, EditUser, LoadUsers, SortByAge, SortById} from "./types";
 
 const initialState = {
     users: [],
@@ -74,6 +74,11 @@ export const usersReducer = (state = initialState, action) => {
                     users: nextUsers,
                 }
             })();
+        case LoadUsers :
+            return {
+
+                users: action.data
+            }
 
         default :
             return state;
