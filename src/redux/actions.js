@@ -28,3 +28,15 @@ export function deleteUser(id) {
 
     }
 }
+export function editUser(id,name,age) {
+    return {
+        type: 'UPDATE-USER',
+        data: {
+            id,
+            name,
+            age
+        }
+
+    }
+}
+

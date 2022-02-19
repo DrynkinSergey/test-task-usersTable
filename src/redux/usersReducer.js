@@ -1,4 +1,4 @@
-import {AddUser, DeleteUser, SortByAge, SortById} from "./types";
+import {AddUser, DeleteUser, EditUser, SortByAge, SortById} from "./types";
 
 const initialState = {
     users: [],
@@ -47,11 +47,33 @@ export const usersReducer = (state = initialState, action) => {
                     ...state,
                     users: nextUsers,
 
-
                 }
             })();
 
+        case EditUser:
+            return (() => {
+                const { data } = action;
+                const { users } = state;
+                const itemIndex = users.findIndex(res => res.id === data.id);
+                const nextUsers = [
+                    ...users.slice(0, itemIndex),
+                    {
 
+                        id: users[itemIndex].id,
+                        index: users[itemIndex].index,
+                        avatar: users[itemIndex].avatar,
+                        name: data.name,
+                        age: data.age,
+                        status: users[itemIndex].status,
+                    },
+                    ...users.slice(itemIndex + 1)
+                ];
+
+                return {
+                    ...state,
+                    users: nextUsers,
+                }
+            })();
 
         default :
             return state;

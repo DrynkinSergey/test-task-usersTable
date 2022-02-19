@@ -9,44 +9,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {connect, useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
-import {deleteUser, sortAge} from "./redux/actions";
+import {deleteUser, editUser, sortAge} from "./redux/actions";
 
 const App = (props) => {
 
-
-   /* useEffect(() => {
-
-        // if (localStorage.getItem('data') !== null) {
-        //     localStorage.setItem("data", JSON.stringify(props.users));
-        //     const data = JSON.parse(localStorage.getItem('data'));
-        //
-        //     console.log('data storage >>>',data);
-        //     // dispatch(sortAge(data));
-        // }else {
-        //     console.log('No data in localStorage')
-        // }
-        localStorage.setItem("data", JSON.stringify(props.users));
-        console.log('Component did mount')
-        return () => {
-            console.log('Component will unmount');
-            localStorage.setItem("data", JSON.stringify(props.users));
-            const data = JSON.parse(localStorage.getItem('data'));
-            console.log(data)
-
-        }
-
-    },[]);*/
-
-
-    function useAsync(asyncFn, onSuccess) {
-        useEffect(() => {
-            let isActive = true;
-            asyncFn().then(data => {
-                if (isActive) onSuccess(data);
-            });
-            return () => { isActive = false };
-        }, [asyncFn, onSuccess]);
-    }
     const [sortedAge, setSorted] = useState(false);
     const [sortedId, setSortedId] = useState(false);
     const sortItemById = () => {
@@ -65,9 +31,9 @@ const App = (props) => {
     }
     const sortItemByAge = () => {
         if (sortedAge) {
-           const arr = (props.users).concat().sort((a, b) => +a.age > +b.age ? 1 : -1).reverse()
+            const arr = (props.users).concat().sort((a, b) => +a.age > +b.age ? 1 : -1).reverse()
                 .map((item) => item);
-           setSorted(!sortedAge);
+            setSorted(!sortedAge);
             dispatch(sortAge(arr));
         } else {
             const arr = (props.users).concat().sort((a, b) => +a.age > +b.age ? 1 : -1)
@@ -79,16 +45,6 @@ const App = (props) => {
 
     }
 
-    /* const data = JSON.parse(localStorage.getItem('data'));
-     localStorage.getItem('data')
-
-     function saveData() {
-         localStorage.setItem("data", JSON.stringify(props.users));
-     }
-
-     function deleteData() {
-         localStorage.removeItem('data');
-     }*/
 
     const dispatch = useDispatch();
 
@@ -119,10 +75,21 @@ const App = (props) => {
                                         <TableCell align="right">{row.age}</TableCell>
                                         <TableCell align="right">{row.status === 'yes' ? 'Активен' : '-'}</TableCell>
                                         <TableCell align="center">
-                                            <button onClick={()=>{
-                                                dispatch(deleteUser(row.id))
-                                                console.log(row.id);
-                                            }} className='btnDelete'>Удалить</button>
+
+                                              <div> <button onClick={() => {
+                                                  dispatch(deleteUser(row.id))
+                                              }} className='btnDelete'><span>Удалить</span>
+                                              </button></div>
+
+                                                <Link  to={{
+                                                    pathname: "/editUser",
+                                                    propsSearch: {id:row.id,
+                                                    name:row.name,
+                                                    age:row.age}
+                                                }}><span className='btnEdit'>Редактировать</span></Link>
+
+
+
                                         </TableCell>
                                     </TableRow>
                                 ))

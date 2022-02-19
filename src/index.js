@@ -6,24 +6,18 @@ import App from "./App";
 import {rootReducer} from "./redux/rootReducer";
 import {BrowserRouter, Route, Redirect} from "react-router-dom";
 import AddUser from "./Components/AddUser/AddUser";
+import EditUser from "./Components/EditUser/EditUser";
 const store = createStore(rootReducer);
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter >
             <Route  path="/home" component={App}/>
             <Route exact path="/" component={App}/>
-            <Route
-                exact
-                path="/addUser"
-                render={() => (
+            <Route exact path="/addUser" component={AddUser} />
+            <Route exact path="/editUser" component={EditUser} />
 
-                    window.location.href==="http://localhost:3000/addUser"? (
-                            <AddUser/>
-                    ) : (
-                        <Redirect to="/home"/>
 
-                    ))}
-            />
+
         </BrowserRouter>
     </Provider>
     ,  document.getElementById('root')
