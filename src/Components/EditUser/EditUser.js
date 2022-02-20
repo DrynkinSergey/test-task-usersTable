@@ -30,9 +30,9 @@ const EditUser = (props) => {
             <input autoFocus={true} placeholder={name} onChange={event => setName(event.target.value)}/>
             <p>Возраст</p>
             <input placeholder={age} onChange={event => setAge(event.target.value)}/>
-            <div className='flex'><NavLink className='link btn ok' onClick={handleSubmit} to="/home"><p>Изменить
+            <div className='flex'><NavLink className='link btn ok' onClick={handleSubmit} to="/test-task-usersTable"><p>Изменить
                 пользователя</p></NavLink>
-                <NavLink className='link btn cancel' to="/home"><p>Отмена</p></NavLink></div>
+                <NavLink className='link btn cancel' to="/test-task-usersTable"><p>Отмена</p></NavLink></div>
         </form>
 
     );

@@ -11,7 +11,7 @@ const store = createStore(rootReducer);
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter >
-            <Route  path="/home" component={App}/>
+            <Route  path="/test-task-usersTable" component={App}/>
             <Route exact path="/" component={App}/>
             <Route exact path="/addUser" component={AddUser} />
             <Route exact path="/editUser" component={EditUser} />

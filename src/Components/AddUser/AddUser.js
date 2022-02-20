@@ -38,9 +38,9 @@ const AddUser = () => {
             <input autoFocus={true} placeholder='Введите имя: ' onChange={event => setName(event.target.value)}/>
             <p>Возраст</p>
             <input placeholder='Введите возраст: ' onChange={event => setAge(event.target.value)}/>
-            <div className='flex'><NavLink className='link btn ok' onClick={handleSubmit} to="/home"><p>Добавить
+            <div className='flex'><NavLink className='link btn ok' onClick={handleSubmit} to="/test-task-usersTable"><p>Добавить
                 пользователя</p></NavLink>
-                <NavLink className='link btn cancel' to="/home"><p>Отмена</p></NavLink></div>
+                <NavLink className='link btn cancel' to="/test-task-usersTable"><p>Отмена</p></NavLink></div>
         </form>
 
     );
