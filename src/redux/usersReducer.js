@@ -13,7 +13,7 @@ export const usersReducer = (state = initialState, action) => {
                 users: [...state.users,
                     {
                         id: action.data.id,
-                        index: state.users.length+1,
+                        index: state.users.length + 1,
                         avatar: action.data.avatar,
                         name: action.data.name,
                         age: action.data.age,
@@ -34,8 +34,8 @@ export const usersReducer = (state = initialState, action) => {
             }
         case DeleteUser:
             return (() => {
-                const { id } = action;
-                const { users } = state;
+                const {id} = action;
+                const {users} = state;
                 const itemIndex = users.findIndex(res => res.id === id);
 
                 const nextUsers = [
@@ -52,8 +52,8 @@ export const usersReducer = (state = initialState, action) => {
 
         case EditUser:
             return (() => {
-                const { data } = action;
-                const { users } = state;
+                const {data} = action;
+                const {users} = state;
                 const itemIndex = users.findIndex(res => res.id === data.id);
                 const nextUsers = [
                     ...users.slice(0, itemIndex),

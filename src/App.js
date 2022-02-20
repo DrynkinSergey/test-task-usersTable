@@ -17,24 +17,20 @@ const App = (props) => {
     const [sortedAge, setSorted] = useState(false);
     const [sortedId, setSortedId] = useState(false);
     useEffect(() => {
-        if(props.users.length === 0){
-            dispatch(loadUsers(JSON.parse(localStorage.getItem('data')))) ;
+        if (props.users.length === 0) {
+            dispatch(loadUsers(JSON.parse(localStorage.getItem('data'))));
         }
 
     }, []);
+    useEffect(() => {
+        if (props.users.length > 0) {
+            localStorage.setItem('data', JSON.stringify(props.users));
+        }
+        if (props.users.length === 0) {
+            localStorage.setItem('data', JSON.stringify(props.users));
+        }
+    }, [props.users]);
 
-    // ------- Костыль по сохранению юзеров в local storage
-   window.addEventListener('mousemove', ()=>{
-       if(props.users.length > 0){
-           localStorage.setItem('data', JSON.stringify(props.users));
-       }
-       if(props.users.length === 0){
-           localStorage.setItem('data', JSON.stringify(props.users));
-       }
-
-    }
-
-   )
 
     const sortItemById = () => {
         if (sortedId) {
@@ -71,8 +67,9 @@ const App = (props) => {
 
     return (
         <div className='AppWrapper'>
-            <Link className='link btn ok'  to="/addUser"><p onClick={()=> {
-                localStorage.setItem('data', JSON.stringify(props.users));}}>Добавить пользователя</p></Link>
+            <Link className='link btn ok' to="/addUser"><p onClick={() => {
+                localStorage.setItem('data', JSON.stringify(props.users));
+            }}>Добавить пользователя</p></Link>
             {props.users.length > 0 ? <TableContainer component={Paper} className='table'>
                     <Table sx={{minWidth: 650}} aria-label="test table">
                         <TableHead>
@@ -98,19 +95,22 @@ const App = (props) => {
                                         <TableCell align="right">{row.status === 'yes' ? 'Активен' : '-'}</TableCell>
                                         <TableCell align="center">
 
-                                              <div> <button onClick={() => {
-                                                  setData(props.users)
-                                                  dispatch(deleteUser(row.id))
-                                              }} className='btnDelete'><span>Удалить</span>
-                                              </button></div>
+                                            <div>
+                                                <button onClick={() => {
+                                                    setData(props.users)
+                                                    dispatch(deleteUser(row.id))
+                                                }} className='btnDelete'><span>Удалить</span>
+                                                </button>
+                                            </div>
 
-                                                <Link  to={{
-                                                    pathname: "/editUser",
-                                                    propsSearch: {id:row.id,
-                                                    name:row.name,
-                                                    age:row.age}
-                                                }}><span className='btnEdit'>Редактировать</span></Link>
-
+                                            <Link to={{
+                                                pathname: "/editUser",
+                                                propsSearch: {
+                                                    id: row.id,
+                                                    name: row.name,
+                                                    age: row.age
+                                                }
+                                            }}><span className='btnEdit'>Редактировать</span></Link>
 
 
                                         </TableCell>

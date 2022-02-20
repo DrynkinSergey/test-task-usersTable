@@ -14,6 +14,7 @@ export function sortAge(data) {
 
     }
 }
+
 export function sortId(data) {
     return {
         type: 'SORT-ID-A-B',
@@ -21,6 +22,7 @@ export function sortId(data) {
 
     }
 }
+
 export function deleteUser(id) {
     return {
         type: 'DELETE-USER',
@@ -28,7 +30,8 @@ export function deleteUser(id) {
 
     }
 }
-export function editUser(id,name,age) {
+
+export function editUser(id, name, age) {
     return {
         type: 'UPDATE-USER',
         data: {
@@ -39,6 +42,7 @@ export function editUser(id,name,age) {
 
     }
 }
+
 export function loadUsers(data) {
     return {
         type: 'LOAD-USERS',
